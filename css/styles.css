@@ -925,6 +925,43 @@ input.is-invalid:focus, textarea.is-invalid:focus {
 .trademark-note { max-width: 620px; font-size: .75rem; color: rgba(255, 255, 255, .52); }
 
 
+/* ---------- 12b. Legal pages ---------- */
+.legal-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 0 0;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--colour-muted);
+  text-decoration: none;
+  margin-bottom: 28px;
+}
+.back-link:hover { color: var(--colour-blue); }
+.back-link span { transition: margin var(--transition); }
+.back-link:hover span { margin-right: 3px; }
+
+.legal-content h1 { margin-bottom: .2em; }
+.legal-content > .fine-print { margin-bottom: 40px; }
+
+.legal-body h2 {
+  font-size: 1.3rem;
+  margin-top: 2.4em;
+  padding-top: 0;
+}
+.legal-body h2:first-child { margin-top: 0; }
+.legal-body h3 { font-size: 1rem; margin-top: 1.6em; }
+.legal-body p, .legal-body ul { color: var(--colour-text); }
+.legal-body ul { margin: 0 0 1rem; padding-left: 1.25em; }
+.legal-body li { margin-bottom: .4em; }
+.legal-body li:last-child { margin-bottom: 0; }
+
+
 /* ---------- 13. Responsive ---------- */
 @media (max-width: 1000px) {
   .hero-grid { grid-template-columns: 1fr; gap: 44px; }
