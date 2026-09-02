@@ -4,10 +4,9 @@
    Scope: mobile navigation, contact-form validation, contact-form submission.
 
    Enquiries are sent via FormSubmit.co (no backend of our own) to
-   davidjohnson6781@gmail.com as a temporary measure until a dedicated
-   clear-metric.co.uk mailbox is set up — see submitEnquiry() below. The
-   form's action/method attributes in index.html point at the same address
-   as a no-JS fallback.
+   info@clear-metric.co.uk — see submitEnquiry() below. The form's
+   action/method attributes in index.html point at the same address as a
+   no-JS fallback.
    ========================================================================== */
 (function () {
   'use strict';
@@ -202,7 +201,7 @@
   // FormSubmit.co's AJAX endpoint requires a one-off confirmation: the
   // first enquiry sent to a given address triggers a confirmation email
   // to that address, and submissions aren't forwarded until it's clicked.
-  var ENQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/davidjohnson6781@gmail.com';
+  var ENQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/info@clear-metric.co.uk';
 
   function submitEnquiry(payload) {
     fetch(ENQUIRY_ENDPOINT, {
