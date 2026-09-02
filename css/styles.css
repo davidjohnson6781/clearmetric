@@ -697,6 +697,32 @@ svg { display: block; }
   align-items: center;
 }
 
+.about-byline {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.about-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, .22);
+  flex-shrink: 0;
+}
+.about-name {
+  margin: 0;
+  font-weight: 700;
+  color: #fff;
+  font-size: 1rem;
+}
+.about-role {
+  margin: 0;
+  font-size: .85rem;
+  color: rgba(255, 255, 255, .65);
+}
+
 .about-panel {
   padding: 30px 30px 28px;
   background: rgba(255, 255, 255, .06);
