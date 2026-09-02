@@ -1,0 +1,5 @@
+# PLACEHOLDER: replace https://example.com/ with the real domain before deployment.
+User-agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml
