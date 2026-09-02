@@ -1,12 +1,13 @@
 /* ==========================================================================
    ClearMetric — script.js
 
-   Scope: mobile navigation, contact-form validation, mock submission.
+   Scope: mobile navigation, contact-form validation, contact-form submission.
 
-   ⚠️  THE CONTACT FORM DOES NOT SEND ANYTHING.
-   Submitting shows a success message and discards the data. Wire
-   submitEnquiry() to a real endpoint (see the notes above it) before this
-   site goes live, or enquiries will silently disappear.
+   Enquiries are sent via FormSubmit.co (no backend of our own) to
+   davidjohnson6781@gmail.com as a temporary measure until a dedicated
+   clear-metric.co.uk mailbox is set up — see submitEnquiry() below. The
+   form's action/method attributes in index.html point at the same address
+   as a no-JS fallback.
    ========================================================================== */
 (function () {
   'use strict';
@@ -195,32 +196,43 @@
 
 
   /* ----------------------------------------------------------------------
-     3. Submission — MOCK ONLY
+     3. Submission
      -------------------------------------------------------------------- */
 
-  /**
-   * Pretends to send the enquiry.
-   *
-   * This is the single integration seam. To go live, replace the body with a
-   * real request — the payload is already assembled and showFailure() is
-   * already written:
-   *
-   *   fetch('https://formspree.io/f/YOUR_FORM_ID', {
-   *     method: 'POST',
-   *     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-   *     body: JSON.stringify(payload)
-   *   })
-   *     .then(function (response) {
-   *       if (!response.ok) { throw new Error('Request failed'); }
-   *       showSuccess();
-   *     })
-   *     .catch(showFailure);
-   *
-   * Nothing else on the page needs to change.
-   */
+  // FormSubmit.co's AJAX endpoint requires a one-off confirmation: the
+  // first enquiry sent to a given address triggers a confirmation email
+  // to that address, and submissions aren't forwarded until it's clicked.
+  var ENQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/davidjohnson6781@gmail.com';
+
   function submitEnquiry(payload) {
-    void payload; // The mock does not use it.
-    showSuccess();
+    fetch(ENQUIRY_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Name: payload.name,
+        Company: payload.company,
+        Email: payload.email,
+        Phone: payload.phone || 'Not provided',
+        'Data location': payload.dataLocation || 'Not specified',
+        Budget: payload.budget || 'Not specified',
+        Message: payload.message || 'Not provided',
+        _subject: 'New enquiry — ClearMetric website',
+        _template: 'table',
+        _captcha: 'false'
+      })
+    })
+      .then(function (response) {
+        if (!response.ok) { throw new Error('Request failed'); }
+        return response.json();
+      })
+      .then(function (data) {
+        if (data && String(data.success) === 'true') {
+          showSuccess();
+        } else {
+          showFailure();
+        }
+      })
+      .catch(showFailure);
   }
 
   function showSuccess() {
@@ -232,8 +244,6 @@
     success.focus();
   }
 
-  // Used by the real integration once submitEnquiry() sends anything.
-  // eslint-disable-next-line no-unused-vars
   function showFailure() {
     if (status) {
       status.textContent = 'Sorry, something went wrong. Please try again shortly.';
