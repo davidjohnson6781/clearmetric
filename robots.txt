@@ -1,5 +1,4 @@
-# PLACEHOLDER: replace https://example.com/ with the real domain before deployment.
 User-agent: *
 Allow: /
 
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://www.clear-metric.co.uk/sitemap.xml
